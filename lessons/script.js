@@ -50,19 +50,69 @@
 // 	}
 // }
 
-const chessSize = 8;
-let line = '';
+// let size = 8;
+// let board = '';
 
-for (let i = 0; i < chessSize; i++) {
-	for (let k = 0; k < chessSize; k++) {
-		if (line.length % 2 == 0) {
-			line += ' ';
-		} else {
-			line += '#';
+// for (let i = 0; i < size; i++) {
+// 	for (let n = 0; n < size; n++) {
+// 		if (board.length % 2 === 0) {
+// 			board += ' ';
+// 		} else {
+// 			board += '#';
+// 		}
+// 	}
+
+// 	board += '\n';
+// }
+
+// console.log(board);
+// console.log(board.length);
+
+// Глава 3. Функции
+
+// Минимум
+const minNum = (a, b) => {
+	return a > b ? b : a;
+};
+
+console.log(minNum(0, -10));
+
+// Рекурсия
+const isEven = (num) => {
+	if (num % 2 === 0 || num === 0 || num % 1 !== 0) {
+		return true;
+	}
+
+	return false;
+};
+
+console.log(isEven(-1));
+
+// Подсчет букв
+const countBs = (str) => {
+	let counter = 0;
+
+	for (let i = 0; i < str.length; i++) {
+		if (str[i] === 'B') {
+			counter++;
 		}
 	}
 
-	line += '\n';
-}
-console.log(line);
-console.log(line.length);
+	return counter;
+};
+
+console.log(countBs('BBC'));
+
+const countChar = (str, letter) => {
+	let counter = 0;
+
+	for (let i = 0; i < str.length; i++) {
+		if (str[i] === letter) {
+			counter++;
+		}
+	}
+
+	return counter;
+};
+
+console.log(countChar('kakkerlak', 'k'));
