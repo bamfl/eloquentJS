@@ -116,3 +116,89 @@ const countChar = (str, letter) => {
 };
 
 console.log(countChar('kakkerlak', 'k'));
+
+// Глава 4. Структуры данных: объекты и массивы
+
+// Сумма диапазона
+const range = (from, to, step = 1) => {
+	let arr = [];
+
+	if (step < 0) {
+		for (from; from >= to; from += step) {
+			arr.push(from);
+		}
+	} else	if (step > 0) {
+		for (from; from <= to; from += step) {
+			arr.push(from);
+		}
+	} else {
+		for (from; from <= to; from++) {
+			arr.push(from);
+		}
+	}
+
+	return arr;
+};
+
+// console.log(range(1, 10));
+// console.log(range(1, 10, 2));
+// console.log(range(5, 2, -1));
+
+const summ = (numbers) => {
+	let summValue = 0;
+
+	for (let number of numbers) {
+		summValue += number;
+	}
+
+	return summValue;
+};
+
+console.log(summ(range(1, 10)));
+
+// Массив в обратном порядке
+const oldArr = ['start', 20, 30, 40, 'finish'];
+
+const reverseArr = (arr) => {
+	let newArr = [];
+
+	for (let i = 0; i < arr.length; i++) {
+		newArr[i] = oldArr[(arr.length - 1) - i];
+	}
+
+	return newArr;
+};
+
+console.log(reverseArr(oldArr));
+
+// Список
+let list = {
+	value: 1,
+	rest: {
+		value: 2,
+		rest: {
+			value: 3,
+			rest: null
+		}
+	}
+};
+
+const newList = {
+	value: 0,
+	rest: list
+};
+
+const newList1 = {
+	value: -1,
+	rest: list
+};
+
+let arr1 = [1, 2, 3];
+
+const arrayToList = (oldArr, newArr) => {
+	oldArr.push(newArr);
+
+	return oldArr;
+};
+
+console.log(arrayToList([], arr1));
