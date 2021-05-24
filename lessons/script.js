@@ -140,9 +140,9 @@ const range = (from, to, step = 1) => {
 	return arr;
 };
 
-// console.log(range(1, 10));
-// console.log(range(1, 10, 2));
-// console.log(range(5, 2, -1));
+console.log(range(1, 10));
+console.log(range(1, 10, 2));
+console.log(range(5, 2, -1));
 
 const summ = (numbers) => {
 	let summValue = 0;
@@ -201,4 +201,55 @@ const arrayToList = (oldArr, newArr) => {
 	return oldArr;
 };
 
-console.log(arrayToList([], arr1));
+console.log(arr1);
+
+const arr2 = arrayToList([10, 20], arr1);
+console.log(arr2);
+
+const arr3 = arrayToList(arr2, arr1);
+console.log(arr3);
+
+// Глубокое сравнение
+const myObj1 = {
+	name: 'Dima',
+	age: 26,
+	isMarried: true
+};
+
+const myObj2 = {
+	name: 'Dima',
+	age: 26,
+	isMarried: true
+};
+
+let obj = {here: {is: "an"}, object: 2};
+
+const deepEqual = (obj1, obj2) => {
+	if (Object.keys(obj1).length === Object.keys(obj2).length && typeof obj1 === 'object' && typeof obj2 === 'object') {
+		let obj1Values = [];
+
+		for (let key of Object.keys(obj1)) {
+			obj1Values.push(obj1[key]);
+		}
+
+		let obj2Values = [];
+
+		for (let key of Object.keys(obj2)) {
+			obj2Values.push(obj2[key]);
+		}
+
+		for (let i = 0; i < obj1Values.length; i++) {
+			if (obj1Values[i] === obj2Values[i]) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+
+		return true;
+	}
+};
+
+// deepEqual(myObj1, myObj2);
+// console.log(deepEqual(obj, obj));
+// console.log(deepEqual(obj, {here: 1, object: 2}));
