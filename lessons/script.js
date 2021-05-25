@@ -1371,43 +1371,40 @@ var SCRIPTS = [
 
 // Глава 5. Функции высшего порядка
 // Свертка
-// const arr1 = [[1, 2, 3], [4, 5, 6]];
-// // const newArr = arr1.concat(arr2);
+const arr1 = [[1, 2, 3], [4, 5, 6]];
+// const newArr = arr1.concat(arr2);
 
-// const svertka = (arr1) => {
-// 	console.log(
-// 		arr1.reduce((newArr, current) => newArr.concat(current))
-// 	);
-// };
-
-
-// svertka(arr1);
-
-// // Собственный цикл
-// const loop = (start, condition, change, body) => {
-// 	for (let i = start; condition(i); i = change(i)) {
-// 		body(i);
-// 	}
-// };
+const svertka = (arr1) => {
+	console.log(
+		arr1.reduce((newArr, current) => newArr.concat(current))
+	);
+};
 
 
-// loop(0, i => i < 5, i => i + 1, console.log);
+svertka(arr1);
 
-// // Метод every
-// const every = (arr, func) => {	
-// 	for (let arrItem of arr) {
-// 		if (!func(arrItem)) {
-// 			return false;
-// 		}
-// 	}
+// Собственный цикл
+const loop = (start, condition, change, body) => {
+	for (let i = start; condition(i); i = change(i)) {
+		body(i);
+	}
+};
 
-// 	return true;
-// };
 
-// console.log(every([1, 2, 1], item => item === 1));
+loop(0, i => i < 5, i => i + 1, console.log);
 
-// Доминирующее напрвление письма
-// countBy
+// Метод every
+const every = (arr, func) => {	
+	for (let arrItem of arr) {
+		if (!func(arrItem)) {
+			return false;
+		}
+	}
+
+	return true;
+};
+
+console.log(every([1, 2, 1], item => item === 1));
 
 const characterScript = (arr) => {
 	let ltr = 0,
