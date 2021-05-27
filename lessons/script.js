@@ -1369,61 +1369,63 @@ var SCRIPTS = [
 // console.log(deepEqual(obj, obj));
 // console.log(deepEqual(obj, {here: 1, object: 2}));
 
-// Глава 5. Функции высшего порядка
-// Свертка
-const arr1 = [[1, 2, 3], [4, 5, 6]];
-// const newArr = arr1.concat(arr2);
+// // Глава 5. Функции высшего порядка
+// // Свертка
+// const arr1 = [[1, 2, 3], [4, 5, 6]];
+// // const newArr = arr1.concat(arr2);
 
-const svertka = (arr1) => {
-	console.log(
-		arr1.reduce((newArr, current) => newArr.concat(current))
-	);
-};
-
-
-svertka(arr1);
-
-// Собственный цикл
-const loop = (start, condition, change, body) => {
-	for (let i = start; condition(i); i = change(i)) {
-		body(i);
-	}
-};
+// const svertka = (arr1) => {
+// 	console.log(
+// 		arr1.reduce((newArr, current) => newArr.concat(current))
+// 	);
+// };
 
 
-loop(0, i => i < 5, i => i + 1, console.log);
+// svertka(arr1);
 
-// Метод every
-const every = (arr, func) => {	
-	for (let arrItem of arr) {
-		if (!func(arrItem)) {
-			return false;
-		}
-	}
+// // Собственный цикл
+// const loop = (start, condition, change, body) => {
+// 	for (let i = start; condition(i); i = change(i)) {
+// 		body(i);
+// 	}
+// };
 
-	return true;
-};
 
-console.log(every([1, 2, 1], item => item === 1));
+// loop(0, i => i < 5, i => i + 1, console.log);
 
-const characterScript = (arr) => {
-	let ltr = 0,
-			rtl = 0,
-			ttb = 0;
+// // Метод every
+// const every = (arr, func) => {	
+// 	for (let arrItem of arr) {
+// 		if (!func(arrItem)) {
+// 			return false;
+// 		}
+// 	}
+
+// 	return true;
+// };
+
+// console.log(every([1, 2, 1], item => item === 1));
+
+// const characterScript = (arr) => {
+// 	let ltr = 0,
+// 			rtl = 0,
+// 			ttb = 0;
 	
-	for (let {direction} of arr) {
-		if (direction === 'ltr') {
-			ltr++;
-		} else if (direction === 'rtl') {
-			rtl++;
-		} else {
-			ttb++;
-		}
-	}
+// 	for (let {direction} of arr) {
+// 		if (direction === 'ltr') {
+// 			ltr++;
+// 		} else if (direction === 'rtl') {
+// 			rtl++;
+// 		} else {
+// 			ttb++;
+// 		}
+// 	}
 
-	let total = ltr + rtl + ttb;
+// 	let total = ltr + rtl + ttb;
 
-	console.log(`ltr ${(ltr * 100 / total).toFixed(2)}%, rtl ${(rtl * 100 / total).toFixed(2)}%, ttb ${(ttb * 100 / total).toFixed(2)}%`);
-};
+// 	console.log(`ltr ${(ltr * 100 / total).toFixed(2)}%, rtl ${(rtl * 100 / total).toFixed(2)}%, ttb ${(ttb * 100 / total).toFixed(2)}%`);
+// };
 
-characterScript(SCRIPTS);
+// characterScript(SCRIPTS);
+
+// Глава 6. Тайная жизнь объектов
