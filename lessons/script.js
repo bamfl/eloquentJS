@@ -1369,8 +1369,8 @@ var SCRIPTS = [
 // console.log(deepEqual(obj, obj));
 // console.log(deepEqual(obj, {here: 1, object: 2}));
 
-// // Глава 5. Функции высшего порядка
-// // Свертка
+// Глава 5. Функции высшего порядка
+// Свертка
 // const arr1 = [[1, 2, 3], [4, 5, 6]];
 // // const newArr = arr1.concat(arr2);
 
@@ -1429,3 +1429,167 @@ var SCRIPTS = [
 // characterScript(SCRIPTS);
 
 // Глава 6. Тайная жизнь объектов
+let rabbit = {};
+
+rabbit.speak = function(text) {
+	console.log(text);
+};
+
+rabbit.speak('Hello');
+
+function speak(text) {
+	console.log(`${this.type} кролик говорит ${text}`);
+}
+
+let whiteRabbit = {
+	type: 'Белый',
+	speak
+};
+
+let hungryRabbit = {
+	type: 'Голодный',
+	speak
+};
+
+// whiteRabbit.speak('Привет');
+// hungryRabbit.speak('Пока');
+
+speak.call(whiteRabbit, 'Здоров');
+
+function normalize() {
+	console.log(this.coords.map(coord => coord / this.length));
+}
+
+normalize.call({coords: [0, 2, 3], length: 5});
+
+let protoRabbit = {
+	// speak: function(text) {
+	// 	console.log(`${this.type} кролик говорит ${text}`);
+	// },
+	speak(text) {
+		console.log(`${this.type} кролик говорит ${text}`);
+	}
+};
+
+let killerRabbit = Object.create(protoRabbit);
+
+// loop(0, i => i < 5, i => i + 1, console.log);
+
+// // Метод every
+// const every = (arr, func) => {	
+// 	for (let arrItem of arr) {
+// 		if (!func(arrItem)) {
+// 			return false;
+// 		}
+// 	}
+
+const weirdRabbit = new Rabbit('Странный');
+weirdRabbit.speak('я странный');
+
+class RabbitClass {
+	constructor(type) {
+		this.type = type;
+	}
+
+	speak(text) {
+		console.log(`${this.type} кролик говорит ${text}`);
+	}
+}
+
+const strongRabbit = new RabbitClass('Сильный');
+strongRabbit.speak('я сильный');
+
+// Тип вектора
+class Vec {
+	constructor(x, y) {
+		this.x = x;
+		this.y = y;
+	}
+}
+
+Vec.prototype.plus = function(x, y) {
+	return this.x = this.x + x, this.y = this.y + y;
+};
+
+Vec.prototype.minus = function(x, y) {
+	return this.x = this.x - x, this.y = this.y - y;
+};
+
+const myVec = new Vec(10, 10);
+console.log(myVec.minus(5, 5));
+console.log(myVec.plus(5, 5));
+
+// Группы
+class Group {
+	constructor() {
+		this._group = [];
+	}
+
+	get group() {
+		return this._group;
+	}
+
+	add(item) {
+		if (!this._group[item]) {
+			this._group.push(item);
+		}
+	}
+
+	delete(item) {
+		this._group = this._group.filter(i => i !== item);
+	}
+
+	has(item) {
+		for (let key of this._group) {
+			if (key === item) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+	}
+}
+
+const myGroup = new Group();
+
+myGroup.add(10);
+myGroup.add(20);
+myGroup.add(30);
+myGroup.delete(20);
+
+console.log(myGroup.has(50));
+console.log(myGroup.group);
+
+// Глава 7. Проект: робот
+
+const roads = [
+  "Alice's House-Bob's House",   
+	"Alice's House-Cabin",
+  "Alice's House-Post Office",   
+	"Bob's House-Town Hall",
+  "Daria's House-Ernie's House", 
+	"Daria's House-Town Hall",
+  "Ernie's House-Grete's House", 
+	"Grete's House-Farm",
+  "Grete's House-Shop",          
+	"Marketplace-Farm",
+  "Marketplace-Post Office",     
+	"Marketplace-Shop",
+  "Marketplace-Town Hall",       
+	"Shop-Town Hall"
+];
+
+console.log(roads.length);
+
+function buildGraph(edges) {
+	let graph = Object.create(null);
+
+	function addEdge(from, to) {
+		if (graph[from] === null) {
+			graph[from] = graph[to];
+		} else {
+			graph[from].push(to);
+		}
+	}
+
+}
