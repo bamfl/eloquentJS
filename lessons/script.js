@@ -1371,59 +1371,192 @@ var SCRIPTS = [
 
 // Глава 5. Функции высшего порядка
 // Свертка
-const arr1 = [[1, 2, 3], [4, 5, 6]];
-// const newArr = arr1.concat(arr2);
+// const arr1 = [[1, 2, 3], [4, 5, 6]];
+// // const newArr = arr1.concat(arr2);
 
-const svertka = (arr1) => {
-	console.log(
-		arr1.reduce((newArr, current) => newArr.concat(current))
-	);
-};
-
-
-svertka(arr1);
-
-// Собственный цикл
-const loop = (start, condition, change, body) => {
-	for (let i = start; condition(i); i = change(i)) {
-		body(i);
-	}
-};
+// const svertka = (arr1) => {
+// 	console.log(
+// 		arr1.reduce((newArr, current) => newArr.concat(current))
+// 	);
+// };
 
 
-loop(0, i => i < 5, i => i + 1, console.log);
+// svertka(arr1);
 
-// Метод every
-const every = (arr, func) => {	
-	for (let arrItem of arr) {
-		if (!func(arrItem)) {
-			return false;
-		}
-	}
+// // Собственный цикл
+// const loop = (start, condition, change, body) => {
+// 	for (let i = start; condition(i); i = change(i)) {
+// 		body(i);
+// 	}
+// };
 
-	return true;
-};
 
-console.log(every([1, 2, 1], item => item === 1));
+// loop(0, i => i < 5, i => i + 1, console.log);
 
-const characterScript = (arr) => {
-	let ltr = 0,
-			rtl = 0,
-			ttb = 0;
+// // Метод every
+// const every = (arr, func) => {	
+// 	for (let arrItem of arr) {
+// 		if (!func(arrItem)) {
+// 			return false;
+// 		}
+// 	}
+
+// 	return true;
+// };
+
+// console.log(every([1, 2, 1], item => item === 1));
+
+// const characterScript = (arr) => {
+// 	let ltr = 0,
+// 			rtl = 0,
+// 			ttb = 0;
 	
-	for (let {direction} of arr) {
-		if (direction === 'ltr') {
-			ltr++;
-		} else if (direction === 'rtl') {
-			rtl++;
-		} else {
-			ttb++;
+// 	for (let {direction} of arr) {
+// 		if (direction === 'ltr') {
+// 			ltr++;
+// 		} else if (direction === 'rtl') {
+// 			rtl++;
+// 		} else {
+// 			ttb++;
+// 		}
+// 	}
+
+// 	let total = ltr + rtl + ttb;
+
+// 	console.log(`ltr ${(ltr * 100 / total).toFixed(2)}%, rtl ${(rtl * 100 / total).toFixed(2)}%, ttb ${(ttb * 100 / total).toFixed(2)}%`);
+// };
+
+// characterScript(SCRIPTS);
+
+// Глава 6. Тайная жизнь объектов
+let rabbit = {};
+
+rabbit.speak = function(text) {
+	console.log(text);
+};
+
+rabbit.speak('Hello');
+
+function speak(text) {
+	console.log(`${this.type} кролик говорит ${text}`);
+}
+
+let whiteRabbit = {
+	type: 'Белый',
+	speak
+};
+
+let hungryRabbit = {
+	type: 'Голодный',
+	speak
+};
+
+// whiteRabbit.speak('Привет');
+// hungryRabbit.speak('Пока');
+
+speak.call(whiteRabbit, 'Здоров');
+
+function normalize() {
+	console.log(this.coords.map(coord => coord / this.length));
+}
+
+normalize.call({coords: [0, 2, 3], length: 5});
+
+let protoRabbit = {
+	// speak: function(text) {
+	// 	console.log(`${this.type} кролик говорит ${text}`);
+	// },
+	speak(text) {
+		console.log(`${this.type} кролик говорит ${text}`);
+	}
+};
+
+let killerRabbit = Object.create(protoRabbit);
+
+killerRabbit.type = 'Убийца';
+killerRabbit.speak('убью!');
+
+function Rabbit(type) {
+	this.type = type;
+}
+
+Rabbit.prototype.speak = function(text) {
+	console.log(`${this.type} кролик говорит ${text}`);
+};
+
+const weirdRabbit = new Rabbit('Странный');
+weirdRabbit.speak('я странный');
+
+class RabbitClass {
+	constructor(type) {
+		this.type = type;
+	}
+
+	speak(text) {
+		console.log(`${this.type} кролик говорит ${text}`);
+	}
+}
+
+const strongRabbit = new RabbitClass('Сильный');
+strongRabbit.speak('я сильный');
+
+// Тип вектора
+class Vec {
+	constructor(x, y) {
+		this.x = x;
+		this.y = y;
+	}
+}
+
+Vec.prototype.plus = function(x, y) {
+	return this.x = this.x + x, this.y = this.y + y;
+};
+
+Vec.prototype.minus = function(x, y) {
+	return this.x = this.x - x, this.y = this.y - y;
+};
+
+const myVec = new Vec(10, 10);
+console.log(myVec.minus(5, 5));
+console.log(myVec.plus(5, 5));
+
+// Группы
+class Group {
+	constructor() {
+		this._group = [];
+	}
+
+	get group() {
+		return this._group;
+	}
+
+	add(item) {
+		if (!this._group[item]) {
+			this._group.push(item);
 		}
 	}
 
-	let total = ltr + rtl + ttb;
+	delete(item) {
+		this._group = this._group.filter(i => i !== item);
+	}
 
-	console.log(`ltr ${(ltr * 100 / total).toFixed(2)}%, rtl ${(rtl * 100 / total).toFixed(2)}%, ttb ${(ttb * 100 / total).toFixed(2)}%`);
-};
+	has(item) {
+		for (let key of this._group) {
+			if (key === item) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+	}
+}
 
-characterScript(SCRIPTS);
+const myGroup = new Group();
+
+myGroup.add(10);
+myGroup.add(20);
+myGroup.add(30);
+myGroup.delete(20);
+
+console.log(myGroup.has(50));
+console.log(myGroup.group);
